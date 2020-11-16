@@ -2,3 +2,9 @@
   border-bottom: 1px rgb(201, 201, 201) solid;
   padding: 0.1rem;
 }
+
+.chapter-intro {
+  font-size: 2rem;
+  display: inline;
+  border-bottom: 2px rgb(201, 201, 201, 0.7) solid;
+}
