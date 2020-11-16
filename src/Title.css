@@ -1,0 +1,15 @@
+.title {
+  font-size: 4.5rem;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.author {
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
