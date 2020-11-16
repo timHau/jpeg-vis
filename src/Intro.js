@@ -1,7 +1,7 @@
 import './Intro.css';
 
 export default function Intro() {
-    return <p className="intro">
+    return <div className="intro">
         Die Abkürzung JPEG steht für <span className="text-highlight">Joint Photographic Experts Group</span>, welches
         die JPEG Norm festgelegt hat.
         Bei JPEG handelt es sich um eine verlustbehaftete Komprimierung, was bedeutet, dass
@@ -14,5 +14,5 @@ export default function Intro() {
             <li>Quantisierung</li>
             <li>Umsortierung und Entropiekodierung</li>
         </ol>
-    </p>
+    </div>
 }

@@ -12,4 +12,5 @@
 .author {
   font-size: 1.2rem;
   margin-top: 0.5rem;
+  border-bottom: 1px rgb(201, 201, 201, 0.7) solid;
 }

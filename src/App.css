@@ -5,6 +5,5 @@
 
 .chapter-intro {
   font-size: 2rem;
-  display: inline;
-  border-bottom: 2px rgb(201, 201, 201, 0.7) solid;
+  border-bottom: 1px rgb(201, 201, 201, 0.7) solid;
 }
