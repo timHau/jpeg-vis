@@ -14,7 +14,7 @@ export default function App() {
     <div className="App">
       <Title/>
       <Intro/>
-      <ColorTransform img={mountain}/>
+      <ColorTransform imgSrc={mountain}/>
     </div>
   );
 }
