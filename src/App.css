@@ -8,11 +8,8 @@
   border-bottom: 1px rgb(201, 201, 201, 0.7) solid;
 }
 
-.canvas-container {
+.display-container {
   display: flex;
   flex-direction: column;
-}
-
-.canvas-container > canvas {
-    align-self: center;
+  align-items: center;
 }

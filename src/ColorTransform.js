@@ -5,8 +5,8 @@ import './ColorTransform.css'
 
 function rgbFromImg(img) {
     const canvas = document.createElement('canvas');
-    canvas.width = img.naturalWidth;
-    canvas.height = img.naturalHeight;
+    canvas.width = img.naturalWidth || 1;
+    canvas.height = img.naturalHeight || 1;
     const context = canvas.getContext('2d');
     context.drawImage(img, 0, 0);
     return context.getImageData(0, 0, canvas.width, canvas.height);
@@ -76,7 +76,6 @@ export default function ColorTransform(props) {
     const imgEl = useRef();
     const outputCan = useRef();
     useEffect(() => {
-        if (!imgEl.current || !outputCan.current) return;
         const can = outputCan.current;
         const context = can.getContext('2d');
         const rgbData = rgbFromImg(imgEl.current);
