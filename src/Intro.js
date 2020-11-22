@@ -9,7 +9,6 @@ export default function Intro() {
         funktioniert, einfach gesagt, nach folgenden Schritten.
       <ol>
             <li>Farbmodellumrechnung (RGB zu YCbCr)</li>
-            <li>Tiefpassfilter</li>
             <li>diskrete Kosinustransformation</li>
             <li>Quantisierung</li>
             <li>Umsortierung und Entropiekodierung</li>

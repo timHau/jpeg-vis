@@ -1,9 +1,11 @@
-.ycbcr-container{
+.ycbcr-container {
     display: flex;
-    flex-grow: 2;
-    background-color: red;
+}
+
+.ycbcr-output {
+    margin-left: 3vw;
 }
 
 .original {
-    width: 20rem;
+    height: 400px;
 }
