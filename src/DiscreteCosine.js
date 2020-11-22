@@ -4,7 +4,7 @@ import {
     drawCosineOneDim,
     drawCosineTable,
     selectCosineTable,
- } from './utils.js';
+ } from './discreteCosineHelper.js';
 
 
 export default function DiscreteCosine(props) {

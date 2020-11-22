@@ -102,5 +102,5 @@ export function drawCosineTable(context) {
 }
 
 export function selectCosineTable(e) {
-    return
+    console.log(e.target)
 }
