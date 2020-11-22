@@ -92,15 +92,28 @@ export function drawCosineTable(context) {
 
     const offset = 20;
     const [stepX, stepY] = [(width-2*offset) / 8, (height-2*offset) / 8]
-    for (let i = 0; i < 8; ++i) {
-        for (let j = 0; j < 8; ++j) {
-            const x = offset + i * stepX;
-            const y = offset + j * stepY;
-            draw8x8Tile(i, j, x, y, stepX-10, stepY-10, context)
+    for (let n = 0; n < 8; ++n) {
+        for (let m = 0; m < 8; ++m) {
+            const x = offset + n * stepX;
+            const y = offset + m * stepY;
+            draw8x8Tile(n, m, x, y, stepX-10, stepY-10, context)
         }
     }
 }
 
 export function selectCosineTable(e) {
-    console.log(e.target)
+    const context = e.target.getContext('2d');
+    const relX = e.pageX - e.target.offsetLeft;
+    const relY = e.pageY - e.target.offsetTop;
+    const { width, height } = context.canvas;
+    const offset = 20;
+    const [stepX, stepY] = [(width-2*offset) / 8, (height-2*offset) / 8]
+    const n = Math.min(7, Math.floor(relX/stepX));
+    const m = Math.min(7, Math.floor(relY/stepY));
+    context.clearRect(0, 0, width, height);
+    drawCosineTable(context);
+    context.strokeStyle = 'red';
+    context.lineWidth = 3;
+    context.strokeRect(offset+n*stepX, offset+m*stepY, stepX-10, stepY-10);
+    return [ n, m ];
 }

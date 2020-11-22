@@ -7,7 +7,7 @@ import {
  } from './discreteCosineHelper.js';
 
 
-export default function DiscreteCosine(props) {
+export default function DiscreteCosine() {
     const [n, setN] = useState(1);
 
     const cosineOneDim = useRef();
