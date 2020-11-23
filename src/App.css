@@ -13,3 +13,8 @@
   flex-direction: column;
   align-items: center;
 }
+
+.horizontal-display-container {
+  display: flex;
+  justify-content: space-evenly;
+}

@@ -4,14 +4,16 @@ import {
     drawCosineOneDim,
     drawCosineTable,
     selectCosineTable,
+    draw8x8Tile,
  } from './discreteCosineHelper.js';
 
 
 export default function DiscreteCosine() {
-    const [n, setN] = useState(1);
+    const [n, setN] = useState(0);
 
     const cosineOneDim = useRef();
     const cosineTable = useRef();
+    const cosineSelect = useRef();
     useEffect(() => {
         const contextOneDim = cosineOneDim.current.getContext('2d');
         drawCosineOneDim(n, contextOneDim);
@@ -21,6 +23,15 @@ export default function DiscreteCosine() {
 
     function handleChangeN(e) {
         setN(parseInt(e.target.value));
+    }
+
+    function handleSelect(e) {
+        const [n, m] = selectCosineTable(e);
+        const selectCanvas = cosineSelect.current;
+        const selectContext = selectCanvas.getContext('2d');
+        const { width, height } = selectCanvas;
+        selectContext.fillRect(0, 0, width, height);
+        draw8x8Tile(n, m, 0, 0, width, height, selectContext);
     }
 
     return <div>
@@ -55,8 +66,9 @@ export default function DiscreteCosine() {
                     1 & \\text{sonst}
                 \\end{cases}
             `}/>
-        <div className="display-container">
-            <canvas width={500} height={500} ref={cosineTable} onClick={selectCosineTable}/>
+        <div className="horizontal-display-container">
+            <canvas width={500} height={500} ref={cosineTable} onClick={handleSelect}/>
+            <canvas width={500} height={500} ref={cosineSelect} />
         </div>
     </div>
 }

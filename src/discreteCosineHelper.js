@@ -18,7 +18,8 @@ function canvasSetup(context) {
 }
 
 function cosValueToRgb(val) {
-    return `rgb(${(val+1)*127.5}, ${(val+1)*127.5}, ${(val+1)*127.5})`;
+    // TODO TEST THIS
+    return `rgb(${(val+1)*255/2}, ${(val+1)*255/2}, ${(val+1)*255/2})`;
 }
 
 export function drawCosineOneDim(n, context) {
@@ -67,13 +68,15 @@ export function drawCosineOneDim(n, context) {
 }
 
 function getDiscCosine(x, y) {
+    const [c_x, c_y] = x === y ? [1/Math.sqrt(2), 1/Math.sqrt(2)] : [1, 1];
     return (n, m) => {
-        return Math.cos(((2*n+1)*x*Math.PI)/16) 
-             * Math.cos(((2*m+1)*y*Math.PI)/16);
+        // return 1/4 * c_x * c_y * Math.cos(((2*n+1)*x*Math.PI)/16) 
+        //    * Math.cos(((2*m+1)*y*Math.PI)/16);
+        return Math.cos(m*x*Math.PI/8) * Math.cos(n*y*Math.PI/8)
     }
 }
 
-function draw8x8Tile(n, m, x, y, w, h, context) {
+export function draw8x8Tile(n, m, x, y, w, h, context) {
     const [stepX, stepY] = [w/8, h/8];
     for (let i = 0; i < 8; ++i) {
         for (let j = 0; j < 8; ++j) {
