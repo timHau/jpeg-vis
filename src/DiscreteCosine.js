@@ -21,7 +21,7 @@ export default function DiscreteCosine() {
         drawCosineOneDim(n, contextOneDim);
         const contextTable = cosineTable.current.getContext('2d');
         drawCosineTable(contextTable);
-        drawCosine3d(cosine3d.current, 0, 0);
+        // drawCosine3d(cosine3d.current, 0, 0);
     })
 
     function handleChangeN(e) {

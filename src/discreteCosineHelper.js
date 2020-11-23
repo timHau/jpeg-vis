@@ -17,11 +17,9 @@ function canvasSetup(context) {
     return { width, height };
 }
 
-function cosValueToRgb(val) {
+export function cosValueToRgb(val) {
     // TODO TEST THIS
-    return `rgb(${Math.floor((val+1)*255/2)}, 
-                ${Math.floor((val+1)*255/2)}, 
-                ${Math.floor((val+1)*255/2)})`;
+    return `rgb(${Math.floor((val+1)*255/2)}, ${Math.floor((val+1)*255/2)}, ${Math.floor((val+1)*255/2)})`;
 }
 
 export function drawCosineOneDim(n, context) {
@@ -69,12 +67,12 @@ export function drawCosineOneDim(n, context) {
     }
 }
 
-function getDiscCosine(x, y) {
+export function getDiscCosine(x, y) {
     const [c_x, c_y] = x === y ? [1/Math.sqrt(2), 1/Math.sqrt(2)] : [1, 1];
     return (n, m) => {
         // return 1/4 * c_x * c_y * Math.cos(((2*n+1)*x*Math.PI)/16) 
         //    * Math.cos(((2*m+1)*y*Math.PI)/16);
-        return Math.cos(m*x*Math.PI/8) * Math.cos(n*y*Math.PI/8)
+        return Math.cos(n*x*Math.PI) * Math.cos(m*y*Math.PI)
     }
 }
 
@@ -84,7 +82,7 @@ export function draw8x8Tile(n, m, x, y, w, h, context) {
         for (let j = 0; j < 8; ++j) {
             const x_i = i*stepX;
             const y_i = j*stepY;
-            const discCosine = getDiscCosine(i, j);
+            const discCosine = getDiscCosine(i/8, j/8);
             const val = discCosine(n, m);
             context.fillStyle = cosValueToRgb(val);
             context.fillRect(x + x_i, y + y_i, stepX, stepY);
