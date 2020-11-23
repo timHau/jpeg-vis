@@ -19,7 +19,9 @@ function canvasSetup(context) {
 
 function cosValueToRgb(val) {
     // TODO TEST THIS
-    return `rgb(${(val+1)*255/2}, ${(val+1)*255/2}, ${(val+1)*255/2})`;
+    return `rgb(${Math.floor((val+1)*255/2)}, 
+                ${Math.floor((val+1)*255/2)}, 
+                ${Math.floor((val+1)*255/2)})`;
 }
 
 export function drawCosineOneDim(n, context) {

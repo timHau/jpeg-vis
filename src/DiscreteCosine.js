@@ -6,6 +6,7 @@ import {
     selectCosineTable,
     draw8x8Tile,
  } from './discreteCosineHelper.js';
+ import { drawCosine3d } from './cosine3dHelper.js';
 
 
 export default function DiscreteCosine() {
@@ -14,11 +15,13 @@ export default function DiscreteCosine() {
     const cosineOneDim = useRef();
     const cosineTable = useRef();
     const cosineSelect = useRef();
+    const cosine3d = useRef();
     useEffect(() => {
         const contextOneDim = cosineOneDim.current.getContext('2d');
         drawCosineOneDim(n, contextOneDim);
         const contextTable = cosineTable.current.getContext('2d');
         drawCosineTable(contextTable);
+        drawCosine3d(cosine3d.current, 0, 0);
     })
 
     function handleChangeN(e) {
@@ -32,6 +35,8 @@ export default function DiscreteCosine() {
         const { width, height } = selectCanvas;
         selectContext.fillRect(0, 0, width, height);
         draw8x8Tile(n, m, 0, 0, width, height, selectContext);
+        const canvas3d = cosine3d.current;
+        drawCosine3d(canvas3d, n, m);
     }
 
     return <div>
@@ -67,8 +72,9 @@ export default function DiscreteCosine() {
                 \\end{cases}
             `}/>
         <div className="horizontal-display-container">
-            <canvas width={500} height={500} ref={cosineTable} onClick={handleSelect}/>
-            <canvas width={500} height={500} ref={cosineSelect} />
+            <canvas width={400} height={400} ref={cosineTable} onClick={handleSelect}/>
+            <canvas width={400} height={400} ref={cosineSelect} />
+            <canvas width={400} height={400} ref={cosine3d} />
         </div>
     </div>
 }
