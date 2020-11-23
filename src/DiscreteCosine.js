@@ -6,8 +6,13 @@ import {
     selectCosineTable,
     draw8x8Tile,
  } from './discreteCosineHelper.js';
- import { drawCosine3d } from './cosine3dHelper.js';
+ import { 
+     setupCosine3d,
+     drawCosine3d,
+} from './cosine3dHelper.js';
 
+
+let camera, scene, renderer, controls;
 
 export default function DiscreteCosine() {
     const [n, setN] = useState(0);
@@ -21,7 +26,14 @@ export default function DiscreteCosine() {
         drawCosineOneDim(n, contextOneDim);
         const contextTable = cosineTable.current.getContext('2d');
         drawCosineTable(contextTable);
-        // drawCosine3d(cosine3d.current, 0, 0);
+        [camera, scene, renderer, controls] = setupCosine3d(cosine3d.current);
+        drawCosine3d(scene, 0, 0);
+        const render = () => {
+            window.requestAnimationFrame(render);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        render();
     })
 
     function handleChangeN(e) {
@@ -35,8 +47,13 @@ export default function DiscreteCosine() {
         const { width, height } = selectCanvas;
         selectContext.fillRect(0, 0, width, height);
         draw8x8Tile(n, m, 0, 0, width, height, selectContext);
-        const canvas3d = cosine3d.current;
-        drawCosine3d(canvas3d, n, m);
+
+        for( var i = scene.children.length - 1; i >= 0; i--) { 
+            const obj = scene.children[i];
+            scene.remove(obj); 
+       }
+
+        drawCosine3d(scene, n, m);
     }
 
     return <div>
