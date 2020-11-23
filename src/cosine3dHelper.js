@@ -13,6 +13,7 @@ export function setupCosine3d(canvas) {
     camera.lookAt(new THREE.Vector3(0,0,0));
     const scene = new THREE.Scene();
     const renderer = new THREE.WebGLRenderer({ canvas, antialias:true });
+    renderer.setClearColor(0xeeeeee);
     const controls = new OrbitControls(camera, renderer.domElement);
     return [ camera, scene, renderer, controls ];
 }
@@ -46,18 +47,23 @@ export function drawCosine3d(scene, n, m) {
         }
     }
 
+    const pointLight = new THREE.PointLight( 0xffffff, 9, 100 );
+    pointLight.position.set( 0, 70, 0 );
+    scene.add( pointLight );
+
     const paraGeo = new THREE.ParametricBufferGeometry(
         (u, v, dest) => dest.set(
                 -20.5 +  u * 40, 
-                8 + 2*getDiscCosine(u,v)(n,m), 
+                8 + 4*getDiscCosine(u,v)(n,m), 
                 -20.5 + v * 40),
-        100, 100
+        40, 40
     );
     const paraMat = new THREE.MeshBasicMaterial({ 
             color: 'rgb(0, 0, 255)', 
             side: THREE.DoubleSide,
             transparent: true,
-            opacity: 0.6,
+            opacity: 0.8,
+            wireframe: true,
          });
     const para = new THREE.Mesh(paraGeo, paraMat);
     scene.add(para);
