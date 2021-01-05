@@ -25,7 +25,7 @@ export function drawCosine3d(scene, n, m) {
         for (let j = 0; j < 8; ++j) {
             const x = -18 + i*5;
             const y = -18 + j*5;
-            const discCosine = getDiscCosine(i/8, j/8);
+            const discCosine = getDiscCosine(i/7, j/7);
             const val = discCosine(n, m);
 
             const pgeo = new THREE.PlaneBufferGeometry(size, size, 20, 20);

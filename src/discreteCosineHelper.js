@@ -118,7 +118,7 @@ export function draw8x8Tile(n, m, x, y, w, h, context) {
         for (let j = 0; j < 8; ++j) {
             const x_i = i*stepX;
             const y_i = j*stepY;
-            const discCosine = getDiscCosine(i/8, j/8);
+            const discCosine = getDiscCosine(i/7, j/7);
             const val = discCosine(n, m);
             context.fillStyle = cosValueToRgb(val);
             context.fillRect(x + x_i, y + y_i, stepX, stepY);
