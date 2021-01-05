@@ -75,6 +75,43 @@ export function getDiscCosine(x, y) {
     }
 }
 
+export function getDiscCosineMat(n, m) {
+    const res = [];
+    for (let j = 0; j < 8; ++j) {
+        const col = [];
+        for (let i = 0; i < 8; ++i) {
+            const discCosine = getDiscCosine(i/8, j/8);
+            const val = discCosine(n, m);
+            col.push(val);
+        }
+        res.push(col);
+    }
+    return res;
+}
+
+export function matToVec(mat) {
+    const res = [];
+    for (let row of mat) {
+        for (let val of row) {
+            res.push(val);
+        }
+    }
+    return res;
+}
+
+export function vecToMat(vec) {
+    const res = [];
+    for (let i = 0; i < 8; ++i) {
+        const row = [];
+        for (let j = 0; j < 8; ++j) {
+            const val = vec[i*8+j];
+            row.push(val);
+        }
+        res.push(row);
+    }
+    return res;
+}
+
 export function draw8x8Tile(n, m, x, y, w, h, context) {
     const [stepX, stepY] = [w/8, h/8];
     for (let i = 0; i < 8; ++i) {

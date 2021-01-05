@@ -5,6 +5,9 @@ import {
     drawCosineTable,
     selectCosineTable,
     draw8x8Tile,
+    getDiscCosineMat,
+    matToVec,
+    vecToMat,
  } from './discreteCosineHelper.js';
  import { 
      setupCosine3d,
