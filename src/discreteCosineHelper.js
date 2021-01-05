@@ -1,3 +1,10 @@
+import linear from 'linear-solve';
+import {
+    scalarMatMul,
+    matAdd,
+    zeros,
+} from './linAlg.js';
+
 function drawAxis(context, xAxis, yAxis) {
     for (let ax of [xAxis, yAxis]) {
         const [axisStart, axisEnd]  = ax;
@@ -31,7 +38,7 @@ export function drawCosineOneDim(n, context) {
     drawAxis(context, xAxis, yAxis);
 
     const scale = 200;
-    const f = x => Math.cos((2*n+1)*Math.PI*x);
+    const f = x => Math.cos(n*Math.PI*x);
     context.beginPath();
     context.moveTo(xStart, yHeight - scale*f(0));
     for (let i = 0; i <= 1; i += 0.001) {
@@ -67,7 +74,7 @@ export function drawCosineOneDim(n, context) {
 }
 
 export function getDiscCosine(x, y) {
-    const [c_x, c_y] = x === y ? [1/Math.sqrt(2), 1/Math.sqrt(2)] : [1, 1];
+    // const [c_x, c_y] = x === y ? [1/Math.sqrt(2), 1/Math.sqrt(2)] : [1, 1];
     return (n, m) => {
         // return 1/4 * c_x * c_y * Math.cos(((2*n+1)*x*Math.PI)/16) 
         //    * Math.cos(((2*m+1)*y*Math.PI)/16);
@@ -77,9 +84,9 @@ export function getDiscCosine(x, y) {
 
 export function getDiscCosineMat(n, m) {
     const res = [];
-    for (let j = 0; j < 8; ++j) {
+    for (let i = 0; i < 8; ++i) {
         const col = [];
-        for (let i = 0; i < 8; ++i) {
+        for (let j = 0; j < 8; ++j) {
             const discCosine = getDiscCosine(i/8, j/8);
             const val = discCosine(n, m);
             col.push(val);
@@ -110,6 +117,20 @@ export function vecToMat(vec) {
         res.push(row);
     }
     return res;
+}
+
+export function drawTile(mat, context) {
+    const [w,h] = [context.canvas.width, context.canvas.height];
+    const [stepX, stepY] = [w/8, h/8];
+    for (let i = 0; i < 8; ++i) {
+        for (let j = 0; j < 8; ++j) {
+            const x_i = i*stepX;
+            const y_i = j*stepY;
+            const val = mat[i][j];
+            context.fillStyle = cosValueToRgb(val);
+            context.fillRect(x_i, y_i, stepX, stepY);
+        }
+    }
 }
 
 export function draw8x8Tile(n, m, x, y, w, h, context) {
@@ -159,4 +180,38 @@ export function selectCosineTable(e) {
     context.lineWidth = 3;
     context.strokeRect(offset+n*stepX, offset+m*stepY, stepX-10, stepY-10);
     return [ n, m ];
+}
+
+export function reconstruct(coeffs, precision=0.2) {
+    const basis = [];
+    for (let i = 0; i < 8; ++i) {
+        for (let j = 0; j < 8; ++j) {
+            const discCosMat = getDiscCosineMat(i, j);
+            basis.push(discCosMat);
+        }
+    }
+
+    let val = zeros(8, 8);
+    for (let i = 0; i < coeffs.length; ++i) {
+        if (Math.abs(coeffs[i]) >= precision) {
+            // coeff_i * A_i
+            const nextTerm = scalarMatMul(coeffs[i], basis[i]);
+            val = matAdd(val, nextTerm);
+        }
+    }
+
+    return val;
+}
+
+export function getCoeffs(resTile) {
+    const b = matToVec(resTile);
+    const A = [];
+    for (let i = 0; i < 8; ++i) {
+        for (let j = 0; j < 8; ++j) {
+            const discCosMat = getDiscCosineMat(i, j);
+            const asVec = matToVec(discCosMat);
+            A.push(asVec);
+        }
+    }
+    return linear.solve(A, b);
 }
