@@ -3,6 +3,7 @@ import {
     scalarMatMul,
     matAdd,
     zeros,
+    matToVec,
 } from './linAlg.js';
 
 function drawAxis(context, xAxis, yAxis) {
@@ -96,28 +97,6 @@ export function getDiscCosineMat(n, m) {
     return res;
 }
 
-export function matToVec(mat) {
-    const res = [];
-    for (let row of mat) {
-        for (let val of row) {
-            res.push(val);
-        }
-    }
-    return res;
-}
-
-export function vecToMat(vec) {
-    const res = [];
-    for (let i = 0; i < 8; ++i) {
-        const row = [];
-        for (let j = 0; j < 8; ++j) {
-            const val = vec[i*8+j];
-            row.push(val);
-        }
-        res.push(row);
-    }
-    return res;
-}
 
 export function drawTile(mat, context) {
     const [w,h] = [context.canvas.width, context.canvas.height];

@@ -37,6 +37,29 @@ export function zeros(n, m) {
     return res;
 }
 
+export function matToVec(mat) {
+    const res = [];
+    for (let row of mat) {
+        for (let val of row) {
+            res.push(val);
+        }
+    }
+    return res;
+}
+
+export function vecToMat(vec) {
+    const res = [];
+    for (let i = 0; i < 8; ++i) {
+        const row = [];
+        for (let j = 0; j < 8; ++j) {
+            const val = vec[i*8+j];
+            row.push(val);
+        }
+        res.push(row);
+    }
+    return res;
+}
+
 export const exampleTile = [
     [-1,  1,  1,  1,  1,  1,  1, -1],
     [ 1, -1,  1,  1,  1,  1, -1,  1],
