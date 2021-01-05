@@ -11,10 +11,12 @@ export default function ColorTransform(props) {
     const imgEl = useRef();
     const outputCan = useRef();
     useEffect(() => {
-        const context = outputCan.current.getContext('2d');
-        const rgbData = rgbFromImg(imgEl.current);
-        const ycbcrData = rgbToYCbCr(rgbData, context);
-        drawYCbCrToCanvas(ycbcrData, context);
+        imgEl.current.addEventListener('load', () => {
+            const context = outputCan.current.getContext('2d');
+            const rgbData = rgbFromImg(imgEl.current);
+            const ycbcrData = rgbToYCbCr(rgbData, context);
+            drawYCbCrToCanvas(ycbcrData, context);
+        })
     })
     const { imgSrc } = props;
     return <div>

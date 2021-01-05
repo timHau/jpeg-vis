@@ -19,6 +19,7 @@ export function setupCosine3d(canvas) {
 }
 
 export function drawCosine3d(scene, n, m) {
+    const f = (u, v) =>  4*getDiscCosine(u,v)(n,m);
     const size = 5;
     for (let i = 0; i < 8; ++i) {
         for (let j = 0; j < 8; ++j) {
@@ -38,12 +39,6 @@ export function drawCosine3d(scene, n, m) {
             plane.rotateX(Math.PI/2);
             scene.add(plane);
 
-            const cgeo = new THREE.BoxBufferGeometry(0.5, 0.5, 0.5);
-            const cmat = new THREE.MeshBasicMaterial({ color: 'rgb(255, 0, 0)' });
-            const cube = new THREE.Mesh(cgeo, cmat);
-            cube.position.x = x ;
-            cube.position.z = y;
-            scene.add(cube);
         }
     }
 
@@ -54,7 +49,7 @@ export function drawCosine3d(scene, n, m) {
     const paraGeo = new THREE.ParametricBufferGeometry(
         (u, v, dest) => dest.set(
                 -20.5 +  u * 40, 
-                8 + 4*getDiscCosine(u,v)(n,m), 
+                8 + f(u, v),
                 -20.5 + v * 40),
         40, 40
     );
