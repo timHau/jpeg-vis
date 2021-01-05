@@ -4,6 +4,14 @@ p {
   max-width: 80rem;
 }
 
+input[type="range"] {
+  width: 30vw;
+}
+
+.slider-container {
+  padding: 1rem;
+}
+
 .text-highlight {
   border-bottom: 1px rgb(201, 201, 201) solid;
   padding: 0.1rem;

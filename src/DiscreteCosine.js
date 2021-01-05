@@ -5,15 +5,12 @@ import {
     drawCosineTable,
     selectCosineTable,
     draw8x8Tile,
-    drawTile,
-    getCoeffs,
-    reconstruct,
  } from './discreteCosineHelper.js';
- import { exampleTile } from './linAlg.js';
  import { 
      setupCosine3d,
      drawCosine3d,
 } from './cosine3dHelper.js';
+import DCExamples from './DCExamples.js';
 import './DiscreteCosine.css';
 
 
@@ -21,14 +18,11 @@ let camera, scene, renderer, controls;
 
 export default function DiscreteCosine() {
     const [n, setN] = useState(1);
-    const [precision, setPrecision] = useState(0.8);
 
     const cosineOneDim = useRef();
     const cosineTable = useRef();
     const cosineSelect = useRef();
     const cosine3d = useRef();
-    const tileExample = useRef();
-    const exampleReconst = useRef();
 
     useEffect(() => {
         // draw one dimensional cosine
@@ -46,22 +40,10 @@ export default function DiscreteCosine() {
             renderer.render(scene, camera);
         }
         render();
-        // draw example for linear equation
-        const contextExample = tileExample.current.getContext('2d');
-        drawTile(exampleTile, contextExample);
-        // handle reconstruction of example tile
-        const coeffs = getCoeffs(exampleTile);
-        const reconstruction = reconstruct(coeffs, 1.0 - precision);
-        const contextReconst = exampleReconst.current.getContext('2d');
-        drawTile(reconstruction, contextReconst);
     })
 
     function handleChangeN(e) {
         setN(parseInt(e.target.value));
-    }
-
-    function handleChangePrecision(e) {
-        setPrecision(parseFloat(e.target.value));
     }
 
     function handleSelect(e) {
@@ -149,23 +131,7 @@ export default function DiscreteCosine() {
             geeignete Linearkombination findet.
         </p>
 
-        <div className="display-container">
-            <div className="slider-container">
-                <label>precision: {precision}</label>
-                <input 
-                    type="range"
-                    min={0} 
-                    max={1} 
-                    step={0.0001} 
-                    value={precision}
-                    onChange={handleChangePrecision}
-                />
-            </div>
-        </div>
-        <div className="horizontal-display-container">
-            <canvas width={300} height={300} ref={tileExample}/>
-            <canvas width={300} height={300} ref={exampleReconst}/>
-        </div>
+        <DCExamples/>
 
         <BlockMath
             math={`
