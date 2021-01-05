@@ -1,3 +1,9 @@
+p {
+  font-size: 1.2rem;
+  line-height: 2.1rem;
+  max-width: 80rem;
+}
+
 .text-highlight {
   border-bottom: 1px rgb(201, 201, 201) solid;
   padding: 0.1rem;

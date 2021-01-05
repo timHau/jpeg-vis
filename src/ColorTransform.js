@@ -21,10 +21,13 @@ export default function ColorTransform(props) {
     const { imgSrc } = props;
     return <div>
         <h4 className="chapter-intro">Farbmodellumrechnung</h4>
-        <div className="ycbcr-container">
-            <img className="original" src={imgSrc} alt="original" ref={imgEl}/>
-            <canvas width={900} height={400} className="ycbcr-output" ref={outputCan}/>
-        </div>
+        <p>
+            Das Eingabebild liegt meistens als RGB Bild vor. Besteht also aus den Kanälen Rot, Grün, Blau. 
+            Damit die Komprimierung leichter wird, wird das RGB Bild in den <a href="https://de.wikipedia.org/wiki/YCbCr-Farbmodell">YCbCr</a> Farbraum umgerechnet.
+            Dieser besteht aus einem Kanal Y für die Grundhelligkeit und zwei Farbkanälen Cb (Blue-Yellow Chrominance) und Cr (Red-Green Chrominance).
+            Die Transformation von RGB nach YCbCr ist linear und kann somit per Matrix vektor Multiplikation durchgeführt werden. Dabei wird jeder Pixel im Eingabebild
+            als 3-dimensionaler Vektor mit Komponenten R,G,B aufgefasst. Die Transformation ist dann gegeben durch:
+        </p>
         <BlockMath
             math={`
                     \\begin{bmatrix} Y \\\\ Cb \\\\ Cr \\end{bmatrix} \\approx
@@ -32,5 +35,14 @@ export default function ColorTransform(props) {
                     \\begin{bmatrix} 0.299 & 0.587 & 0.114 \\\\ -0.168736 & -0.331264 & 0.5 \\\\ 0.5 & -0.418688 & -0.081312 \\end{bmatrix}
                     \\cdot \\begin{bmatrix} R \\\\ G \\\\ B \\end{bmatrix}
             `} />
+        <p>
+            Im folgenden ist die Transformation an einem Beispielbild illustriert. Ganz links ist hier das original Bild zu sehen.
+            Dieses wird dann in die drei anderen Kanäle aufgeteilt. Dabei ist das erste der Y (Grundhelligkeits)-Kanal, der zweite der Cb (Blue-Yellow Chrominance) Kanal 
+            und der letzte ist der Cr (Red-Green Chrominance) Kanal.
+        </p>
+        <div className="ycbcr-container">
+            <img className="original" src={imgSrc} alt="original" ref={imgEl}/>
+            <canvas width={900} height={400} className="ycbcr-output" ref={outputCan}/>
+        </div>
     </div>
 }
