@@ -15,4 +15,5 @@ npm start
 ```
 
 ## Screenshots
+![one dimensional cosine](./screenshots/dc_one_dim.png)
 ![discrete cosine plot](./screenshots/dc_plot.png)
