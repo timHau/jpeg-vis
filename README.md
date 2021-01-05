@@ -16,7 +16,7 @@ npm start
 
 ## Screenshots
 ![one dimensional cosine](./screenshots/dc_one_dim.png)
-![discrete cosine plot](./screenshots/dc_plot.png)
+![discrete cosine plot](./screenshots/dcPlot.png)
 
 ## Inspiration
 This project was written by me as part of the seminar data compression held during winter semester 2020/21 in Frankfurt.
