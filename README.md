@@ -17,3 +17,7 @@ npm start
 ## Screenshots
 ![one dimensional cosine](./screenshots/dc_one_dim.png)
 ![discrete cosine plot](./screenshots/dc_plot.png)
+
+## Inspiration
+This project was written by me as part of the seminar data compression held during winter semester 2020/21 in Frankfurt.
+A lot of the inspiration and the understanding comes from [Prof. Dr. Edmund Weitz](https://www.haw-hamburg.de/hochschule/beschaeftigte/detail/person/person/show/edmund-weitz/) who gave a [lecture](https://www.youtube.com/watch?v=7fhHQgu2OcY) on the discrete cosine. He also developed a [similar (awesome) webseite](http://weitz.de/dct/), which was a huge help and inspiration for me.
