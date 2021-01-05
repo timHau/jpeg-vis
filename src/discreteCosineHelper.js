@@ -88,7 +88,7 @@ export function getDiscCosineMat(n, m) {
     for (let i = 0; i < 8; ++i) {
         const col = [];
         for (let j = 0; j < 8; ++j) {
-            const discCosine = getDiscCosine(i/8, j/8);
+            const discCosine = getDiscCosine(i/7, j/7);
             const val = discCosine(n, m);
             col.push(val);
         }
