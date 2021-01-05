@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "linear-solve": "^1.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-katex": "^2.0.2",

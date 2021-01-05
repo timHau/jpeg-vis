@@ -121,7 +121,10 @@ export default function DiscreteCosine() {
             <canvas width={400} height={400} ref={cosine3d} />
         </div>
 
-
+        <p>
+            Mit hilfe dieser 64 Blöcke, kann man nun jedes andere <InlineMath math={` 8 \\times 8`}/> Kästchen darstellen, indem man eine 
+            geeignete Linearkombination findet.
+        </p>
 
         <BlockMath
             math={`

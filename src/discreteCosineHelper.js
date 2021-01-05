@@ -94,7 +94,11 @@ export function drawCosineTable(context) {
 
     const offset = 20;
     const [stepX, stepY] = [(width-2*offset) / 8, (height-2*offset) / 8]
+    context.font = "15px sans-serif"
     for (let n = 0; n < 8; ++n) {
+        context.fillStyle ="black"
+        context.fillText(n, 1.5*offset + n*stepX, offset/1.5)
+        context.fillText(n, offset/3, 2*offset + n*stepY)
         for (let m = 0; m < 8; ++m) {
             const x = offset + n * stepX;
             const y = offset + m * stepY;
