@@ -8,11 +8,13 @@ import {
 import { 
     imgDataInto8x8Blocks,
     imgDataFrom8x8Blocks,
+    drawImg8x8Blocks,
 } from './imageHelper.js';
 
 
 export default function DCExampleImg({ imgSrc }) {
     const originalImg = useRef();
+    const img8x8 = useRef();
     const reconstImg = useRef();
 
     useEffect(() => {
@@ -25,30 +27,14 @@ export default function DCExampleImg({ imgSrc }) {
             // we are only interested in the Y channel here
             const yChannel = getYChannel(yCbCr);
             // draw Y channel of original image
-            // drawChannel(yChannel, contextOriginal, [0, 0]);
-            // reconstruct image
-            // const blocks8x8 = imgDataInto8x8Blocks(yChannel);
-            const contextReconst = reconstImg.current.getContext('2d');
-            // draw8x8Blocks(blocks8x8, yChannel, contextReconst);
-
-
-
-            const TMP_w = 296
-            const TMP_h = 296
-            const TMP = contextOriginal.createImageData(TMP_w, TMP_h);
-            for (let i = 0; i< TMP.data.length; i +=4) {
-                const v = Math.floor(Math.random() * 255);
-                TMP.data[i] = v;
-                TMP.data[i+1] = v;
-                TMP.data[i+2] = v;
-                TMP.data[i+3] = 255;
-            }
-           drawChannel(TMP, contextOriginal, [0,0])
-            const TMP_blocks = imgDataInto8x8Blocks(TMP);
-            const TMP_data = imgDataFrom8x8Blocks(TMP_blocks, TMP_w, TMP_h);
-            console.log(TMP_data);
-           drawChannel(TMP_data, contextOriginal, [TMP_w + 10,0])
-
+            drawChannel(yChannel, contextOriginal, [0, 0]);
+            // split img in 8x8 blocks and plot them
+            const blocks8x8 = imgDataInto8x8Blocks(yChannel);
+            const contextReconst = img8x8.current.getContext('2d');
+            const { width, height } = yChannel;
+            const blocksAsImgData = imgDataFrom8x8Blocks(blocks8x8, width, height);
+            drawImg8x8Blocks(blocks8x8, contextReconst, width, height);
+            // drawChannel(blocksAsImgData, contextReconst, [0, 0]);
         }
         initImg();
     });
@@ -60,6 +46,7 @@ export default function DCExampleImg({ imgSrc }) {
         <div className="horizontal-display-container">
             <span>
                 <canvas width={400} height={400} ref={originalImg} />
+                <canvas width={400} height={400} ref={img8x8} />
                 <canvas width={400} height={400} ref={reconstImg} />
             </span>
         </div>

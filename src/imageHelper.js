@@ -53,3 +53,25 @@ export function imgDataFrom8x8Blocks(blocks8x8, width, height) {
 
     return res;
 }
+
+export function drawImg8x8Blocks(blocks8x8, context, width, height) {
+    const asImgDatas = [];
+    for (let block of blocks8x8) {
+        const flat = flattenDeep(block);
+        const asImgData = context.createImageData(8, 8);
+        for (let i = 0; i < flat.length; ++i) {
+            const val = flat[i];
+            asImgData.data[4 * i + 0] = val;
+            asImgData.data[4 * i + 1] = val;
+            asImgData.data[4 * i + 2] = val;
+            asImgData.data[4 * i + 3] = 255;
+        }
+        asImgDatas.push(asImgData);
+    }
+
+    for (let j = 0; j < height / 8; ++j) {
+        for (let i = 0; i < width / 8; ++i) {
+            drawChannel(asImgDatas[i + j * width / 8], context, [i * 8*1.3, j * 8*1.3])
+        }
+    }
+}
