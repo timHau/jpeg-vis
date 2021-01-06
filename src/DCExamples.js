@@ -7,7 +7,7 @@ import {
  import { exampleTile } from './linAlg.js';
 
 export default function DCExamples() {
-    const [precision, setPrecision] = useState(0.8);
+    const [precision, setPrecision] = useState(0.00001);
     const tileExample = useRef();
     const exampleReconst = useRef();
 
@@ -29,7 +29,7 @@ export default function DCExamples() {
    return <>
         <div className="display-container">
             <div className="slider-container">
-                <label>precision: {precision}</label>
+                <label>precision: {precision.toFixed(5)}</label>
                 <input 
                     type="range"
                     min={0} 

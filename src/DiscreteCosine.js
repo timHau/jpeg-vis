@@ -132,20 +132,5 @@ export default function DiscreteCosine() {
         </p>
 
         <DCExamples/>
-
-        <BlockMath
-            math={`
-                F_{x,y} = \\frac{1}{4}C_xC_y \\sum_{m=0}^7\\sum_{n=0}^7 f_{mn} 
-                \\cos\\frac{(2m+1)x \\pi}{16} \\cos\\frac{(2n+1)y \\pi}{16}
-            `}/>
-        <p>wobei</p>
-        <BlockMath
-            math={`
-                C_x, C_y := 
-                \\begin{cases} 
-                    \\frac{1}{\\sqrt{2}} & \\text{wenn } x,y = 0 \\\\
-                    1 & \\text{sonst}
-                \\end{cases}
-            `}/>
     </div>
 }

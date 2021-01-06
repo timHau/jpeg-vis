@@ -60,13 +60,34 @@ export function vecToMat(vec) {
     return res;
 }
 
+export function getDiscCosine(x, y) {
+    return (n, m) => {
+        return Math.cos(n*x*Math.PI) * Math.cos(m*y*Math.PI)
+    }
+}
+
+export function getDiscCosineMat(n, m) {
+    const res = [];
+    for (let i = 0; i < 8; ++i) {
+        const col = [];
+        for (let j = 0; j < 8; ++j) {
+            const discCosine = getDiscCosine(i/7, j/7);
+            const val = discCosine(n, m);
+            col.push(val);
+        }
+        res.push(col);
+    }
+    return res;
+}
+
+
 export const exampleTile = [
-    [-1,  1,  1,  1,  1,  1,  1, -1],
-    [ 1, -1,  1,  1,  1,  1, -1,  1],
-    [ 1,  1, -1, -1, -1, -1,  1,  1],
-    [ 1,  1, -1,  1,  1, -1,  1,  1],
-    [ 1,  1, -1,  1,  1, -1,  1,  1],
-    [ 1,  1, -1, -1, -1, -1,  1,  1],
-    [ 1, -1,  1,  1,  1,  1, -1,  1],
-    [-1,  1,  1,  1,  1,  1,  1, -1],
-];
+    [  0,  255,  255,  255,  255,  255,  255,    0],
+    [255,    0,  255,  255,  255,  255,    0,  255],
+    [255,  255,    0,    0,    0,    0,  255,  255],
+    [255,  255,    0,  255,  255,    0,  255,  255],
+    [255,  255,    0,  255,  255,    0,  255,  255],
+    [255,  255,    0,    0,    0,    0,  255,  255],
+    [255,    0,  255,  255,  255,  255,    0,  255],
+    [  0,  255,  255,  255,  255,  255,  255,    0],
+].map(row => row.map(v => (v-127)/127));

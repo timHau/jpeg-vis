@@ -4,6 +4,8 @@ import {
     matAdd,
     zeros,
     matToVec,
+    getDiscCosine,
+    getDiscCosineMat,
 } from './linAlg.js';
 
 function drawAxis(context, xAxis, yAxis) {
@@ -73,30 +75,6 @@ export function drawCosineOneDim(n, context) {
         context.strokeRect(20 + i*boxW, height-30, boxW, boxH);
     }
 }
-
-export function getDiscCosine(x, y) {
-    // const [c_x, c_y] = x === y ? [1/Math.sqrt(2), 1/Math.sqrt(2)] : [1, 1];
-    return (n, m) => {
-        // return 1/4 * c_x * c_y * Math.cos(((2*n+1)*x*Math.PI)/16) 
-        //    * Math.cos(((2*m+1)*y*Math.PI)/16);
-        return Math.cos(n*x*Math.PI) * Math.cos(m*y*Math.PI)
-    }
-}
-
-export function getDiscCosineMat(n, m) {
-    const res = [];
-    for (let i = 0; i < 8; ++i) {
-        const col = [];
-        for (let j = 0; j < 8; ++j) {
-            const discCosine = getDiscCosine(i/7, j/7);
-            const val = discCosine(n, m);
-            col.push(val);
-        }
-        res.push(col);
-    }
-    return res;
-}
-
 
 export function drawTile(mat, context) {
     const [w,h] = [context.canvas.width, context.canvas.height];

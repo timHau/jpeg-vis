@@ -1,9 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { 
-    getDiscCosine,
-    cosValueToRgb,
-} from './discreteCosineHelper.js';
+import { cosValueToRgb } from './discreteCosineHelper.js';
+import { getDiscCosine } from './linAlg.js';
 
 export function setupCosine3d(canvas) {
     const { width, height } = canvas;
