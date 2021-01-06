@@ -1,7 +1,6 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { BlockMath, InlineMath } from 'react-katex';
 import { 
-    drawCosineOneDim,
     drawCosineTable,
     selectCosineTable,
     draw8x8Tile,
@@ -10,24 +9,19 @@ import {
      setupCosine3d,
      drawCosine3d,
 } from './cosine3dHelper.js';
-import DCExamples from './DCExamples.js';
+import DCExampleOneDim from './DCExampleOneDim.js';
+import DCExampleReconstruct from './DCExampleReconstruct.js';
 import './DiscreteCosine.css';
 
 
 let camera, scene, renderer, controls;
 
 export default function DiscreteCosine() {
-    const [n, setN] = useState(1);
-
-    const cosineOneDim = useRef();
     const cosineTable = useRef();
     const cosineSelect = useRef();
     const cosine3d = useRef();
 
     useEffect(() => {
-        // draw one dimensional cosine
-        const contextOneDim = cosineOneDim.current.getContext('2d');
-        drawCosineOneDim(n, contextOneDim);
         // draw cosine table
         const contextTable = cosineTable.current.getContext('2d');
         drawCosineTable(contextTable);
@@ -42,9 +36,6 @@ export default function DiscreteCosine() {
         render();
     })
 
-    function handleChangeN(e) {
-        setN(parseInt(e.target.value));
-    }
 
     function handleSelect(e) {
         const [n, m] = selectCosineTable(e);
@@ -64,36 +55,7 @@ export default function DiscreteCosine() {
 
     return <div>
         <h4 className="chapter-intro">Diskrete Kosinustransformation</h4>
-        <p>
-            Als nächstes betrachtet man für ein festes <InlineMath math={`n \\in \\mathbb{N}`}/>  die Funktion <InlineMath math={`x \\mapsto \\cos(n\\cdot x)`}/>. Diese an sich stetige 
-            Funktion wird nun an einer diskreten (sprich endlichen) Anzahl an sogenannten Stützstellen ausgewertet. Im Fall des jpeg Verfahrens 
-            wird diese Kosinusfunktion an 8 Stützstellen ausgewertet. Mit diesem Slider können Sie den Wert von n verändern
-        </p>
-        <div className="display-container">
-            <div className="slider-container">
-                <label>n: {n}</label>
-                <input 
-                    type="range"
-                    min={0} 
-                    max={8} 
-                    step={1} 
-                    value={n}
-                    onChange={handleChangeN}
-                />
-            </div>
-        </div>
-        <p>
-            In dem folgenden Plot ist die stetige Kosinusfunktion zu sehen, sowie die 8 äquidistanten Stützstellen, von denen die Funktion gesampelt wird.
-        </p>
-        <BlockMath math={`
-            \\begin{aligned}
-                f &: \\mathbb{R} \\longmapsto \\mathbb{R} \\\\
-                f(x) &= \\cos(${n} \\cdot x)
-            \\end{aligned}
-        `}/>
-        <div className="display-container">
-            <canvas width={1000}  height={570} ref={cosineOneDim}/>
-        </div> 
+        <DCExampleOneDim/>
         <p>
             Die so von f gesampelten Werte werden nun als Grauwerte interpretiert. Dies ist anhand der Kacheln unter dem Plot zu erkennen.
             Dabei werden die gesampelten Werte vom Interval [-1, 1] ins Interval [0, 255] transformiert. Je höher also der Wert der Funktion
@@ -131,6 +93,6 @@ export default function DiscreteCosine() {
             geeignete Linearkombination findet.
         </p>
 
-        <DCExamples/>
+        <DCExampleReconstruct/>
     </div>
 }

@@ -6,7 +6,7 @@ import {
 } from './discreteCosineHelper.js';
  import { exampleTile } from './linAlg.js';
 
-export default function DCExamples() {
+export default function DCExampleReconstruct() {
     const [precision, setPrecision] = useState(0.00001);
     const tileExample = useRef();
     const exampleReconst = useRef();
