@@ -6,7 +6,7 @@ import Resources from './Resources.js';
 import './App.css';
 import 'katex/dist/katex.min.css';
 
-import mountain from './assets/cozies-tone-unsplash.jpg';
+import mountain from './assets/berg_296x296.jpg';
 
 export default function App() {
   return (

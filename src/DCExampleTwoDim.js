@@ -70,9 +70,10 @@ export default function DCExampleTwoDim() {
         `}/>
         <p>
             gesampelt. In der nächsten Grafik sieht man zur Linken eine Tabelle, die die verschiedenen Muster, die entstehen können, aufzeigt.
-            Dabei wird in der Tabelle jeweils die Indices als Frequenzen genommen. Die Indizierung startet dabei mit der 0. So sieht man bspw. im
+            Dabei wird in der Tabelle jeweils die Indizes als Frequenzen genommen. Die Indizierung startet dabei mit der 0. So sieht man bspw. im
             ersten Muster links oben die Funktion <InlineMath math={`g_{0,0}(x,y) = \\cos(0) \\cos(0) = 1`}/> jeweils ausgewertet auf dem <InlineMath math={` 8 \\times 8`}/> Muster. 
-            Im Kästchen an der Position i,j sieht man die Funktion <InlineMath math={`g_{0,0}(i,j) = \\cos(i x \\pi) \\cos(j y \\pi)`}/>. <br/>
+            Im Kästchen an der Position i,j sieht man die Funktion <InlineMath math={`g_{0,0}(i,j) = \\cos(i x \\pi) \\cos(j y \\pi)`}/>. 
+            Also erhöht sich die x Frequenz der Muster in jeder Zeile und die y Frequenz in jeder Spalte.<br/>
             In der Mitte sieht man eine Vergrößerung des aktuellen Musters und zur Rechten sieht man die dazugehörige Kosinusfunktion über dem 
             Muster geplotet. <br/>
             <span className="text-highlight">Klicken Sie auf eines der Muster um dieses auszuwählen.</span>

@@ -14,7 +14,7 @@ export default function ColorTransform(props) {
         imgEl.current.addEventListener('load', () => {
             const context = outputCan.current.getContext('2d');
             const rgbData = rgbFromImg(imgEl.current);
-            const ycbcrData = rgbToYCbCr(rgbData, context);
+            const ycbcrData = rgbToYCbCr(rgbData);
             drawYCbCrToCanvas(ycbcrData, context);
         })
     })

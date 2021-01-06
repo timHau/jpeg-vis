@@ -1,3 +1,24 @@
+export async function rgbFromImgSrc(imgSrc) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = imgSrc;
+        img.onload = () => resolve(rgbFromImg(img));
+        img.onerror = reject;
+    })
+}
+
+export function getYChannel(yCbCr) {
+    const context = document.createElement('canvas').getContext('2d');
+    const res = context.createImageData(yCbCr);
+    for (let i = 0; i < yCbCr.data.length; i += 4) {
+        res.data[i] = yCbCr.data[i];
+        res.data[i + 1] = yCbCr.data[i];
+        res.data[i + 2] = yCbCr.data[i];
+        res.data[i + 3] = 255;
+    }
+    return res;
+}
+
 export function rgbFromImg(img) {
     const canvas = document.createElement('canvas');
     canvas.width = img.naturalWidth || 1;
@@ -7,22 +28,23 @@ export function rgbFromImg(img) {
     return context.getImageData(0, 0, canvas.width, canvas.height);
 }
 
-export function rgbToYCbCr(rgb, context) {
+export function rgbToYCbCr(rgb) {
+    const context = document.createElement('canvas').getContext('2d');
     const res = context.createImageData(rgb);
     for (let i = 0; i < rgb.data.length; i += 4) {
-        const [r, g, b] = [rgb.data[i], rgb.data[i+1], rgb.data[i+2]];
+        const [r, g, b] = [rgb.data[i], rgb.data[i + 1], rgb.data[i + 2]];
         const y = 0.299 * r + 0.587 * g + 0.114 * b;
         const cb = 128 + (-0.168736) * r + (-0.331264) * g + 0.5 * b;
         const cr = 128 + 0.5 * r + (-0.331264) * g + (-0.081312) * b;
-        res.data[i  ] = y;
-        res.data[i+1] = cb;
-        res.data[i+2] = cr;
-        res.data[i+3] = rgb.data[i+3]
+        res.data[i + 0] = y;
+        res.data[i + 1] = cb;
+        res.data[i + 2] = cr;
+        res.data[i + 3] = rgb.data[i + 3];
     }
-    return res
+    return res;
 }
 
-function drawChannel(data, context, pos) {
+export function drawChannel(data, context, pos) {
     const tmpCan = document.createElement('canvas');
     tmpCan.width = data.width;
     tmpCan.height = data.height;
@@ -41,11 +63,11 @@ export function drawYCbCrToCanvas(imgdata, context) {
     const cr = context.createImageData(imgdata);
     for (let i = 0; i < imgdata.data.length; i += 4) {
         const yData = imgdata.data[i]
-        const cbData = imgdata.data[i+1]
-        const crData = imgdata.data[i+2]
-        y.data[i] = yData; y.data[i+1] = yData; y.data[i+2] = yData; y.data[i+3] = 255;
-        cb.data[i] = 128; cb.data[i+1] = 128; cb.data[i+2] = cbData; cb.data[i+3] = 255;
-        cr.data[i] = crData; cr.data[i+1] = 128; cr.data[i+2] = 128; cr.data[i+3] = 255;
+        const cbData = imgdata.data[i + 1]
+        const crData = imgdata.data[i + 2]
+        y.data[i] = yData; y.data[i + 1] = yData; y.data[i + 2] = yData; y.data[i + 3] = 255;
+        cb.data[i] = 128; cb.data[i + 1] = 128; cb.data[i + 2] = cbData; cb.data[i + 3] = 255;
+        cr.data[i] = crData; cr.data[i + 1] = 128; cr.data[i + 2] = 128; cr.data[i + 3] = 255;
     }
     drawChannel(y, context, [0, 0]);
     drawChannel(cb, context, [300, 0]);
