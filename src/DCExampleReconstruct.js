@@ -12,6 +12,8 @@ export default function DCExampleReconstruct() {
     const tileExample = useRef();
     const exampleTable = useRef();
     const exampleReconst = useRef();
+    const exampleCompareOrig = useRef();
+    const exampleCompareRec = useRef();
 
     useEffect(() => {
         // draw example for linear equation
@@ -25,6 +27,11 @@ export default function DCExampleReconstruct() {
         // draw coefficints of patterns as table
         const contextTable = exampleTable.current.getContext('2d');
         drawCoeffTable(coeffs, 1.0 - precision, contextTable);
+        // compare both patterns in smaller size
+        const contextCompareOrig = exampleCompareOrig.current.getContext('2d');
+        const contextCompareRec = exampleCompareRec.current.getContext('2d');
+        drawTile(exampleTile, contextCompareOrig);
+        drawTile(reconstruction, contextCompareRec);
     });
 
     function handleChangePrecision(e) {
@@ -46,9 +53,22 @@ export default function DCExampleReconstruct() {
             </div>
         </div>
         <div className="horizontal-display-container">
-            <canvas width={400} height={400} ref={tileExample}/>
-            <canvas width={400} height={400} ref={exampleTable}/>
-            <canvas width={400} height={400} ref={exampleReconst}/>
+            <span>
+                <canvas width={400} height={400} ref={tileExample}/>
+                <p className="img-sub">Original Muster</p>
+            </span>
+            <span>
+                <canvas width={400} height={400} ref={exampleTable}/>
+                <p className="img-sub">Koeffizienten der Linearkombination</p>
+            </span>
+            <span>
+                <canvas width={400} height={400} ref={exampleReconst}/>
+                <p className="img-sub">Rekonstruirtes Muster</p>
+            </span>
+            <span>
+                <canvas width={40} height={40} ref={exampleCompareOrig}/>
+                <canvas width={40} height={40} ref={exampleCompareRec}/>
+            </span>
         </div>
    </>
 }

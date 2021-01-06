@@ -1,5 +1,6 @@
 .ycbcr-container {
     display: flex;
+    justify-content: center;
 }
 
 .ycbcr-output {
@@ -8,4 +9,8 @@
 
 .original {
     height: 400px;
+}
+
+.img-sub {
+    text-align: center;
 }

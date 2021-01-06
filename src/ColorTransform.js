@@ -41,8 +41,14 @@ export default function ColorTransform(props) {
             und der letzte ist der Cr (Red-Green Chrominance) Kanal.
         </p>
         <div className="ycbcr-container">
-            <img className="original" src={imgSrc} alt="original" ref={imgEl}/>
-            <canvas width={900} height={400} className="ycbcr-output" ref={outputCan}/>
+            <span>
+                <img className="original" src={imgSrc} alt="original" ref={imgEl}/>
+                <p className="img-sub">Original Bild</p>
+            </span>
+            <span className="ycbcr-output">
+                <canvas width={900} height={400} ref={outputCan}/>
+                <p className="img-sub">Y Kanal (links), Cb Kanal (mitte) und Cr Kanal (rechts)</p>
+            </span>
         </div>
     </div>
 }
