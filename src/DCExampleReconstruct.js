@@ -3,12 +3,14 @@ import {
     drawTile,
     getCoeffs,
     reconstruct,
+    drawCoeffTable,
 } from './discreteCosineHelper.js';
  import { exampleTile } from './linAlg.js';
 
 export default function DCExampleReconstruct() {
     const [precision, setPrecision] = useState(0.00001);
     const tileExample = useRef();
+    const exampleTable = useRef();
     const exampleReconst = useRef();
 
     useEffect(() => {
@@ -20,6 +22,9 @@ export default function DCExampleReconstruct() {
         const reconstruction = reconstruct(coeffs, 1.0 - precision);
         const contextReconst = exampleReconst.current.getContext('2d');
         drawTile(reconstruction, contextReconst);
+        // draw coefficints of patterns as table
+        const contextTable = exampleTable.current.getContext('2d');
+        drawCoeffTable(coeffs, 1.0 - precision, contextTable);
     });
 
     function handleChangePrecision(e) {
@@ -41,8 +46,9 @@ export default function DCExampleReconstruct() {
             </div>
         </div>
         <div className="horizontal-display-container">
-            <canvas width={300} height={300} ref={tileExample}/>
-            <canvas width={300} height={300} ref={exampleReconst}/>
+            <canvas width={400} height={400} ref={tileExample}/>
+            <canvas width={400} height={400} ref={exampleTable}/>
+            <canvas width={400} height={400} ref={exampleReconst}/>
         </div>
    </>
 }

@@ -24,6 +24,7 @@ function canvasSetup(context) {
     context.clearRect(0, 0, width, height);
     context.fillStyle = 'rgba(200,200,200,0.2)';
     context.fillRect(0, 0, width, height);
+    context.font = "15px sans-serif"
     return { width, height };
 }
 
@@ -109,15 +110,14 @@ export function drawCosineTable(context) {
 
     const offset = 20;
     const [stepX, stepY] = [(width-2*offset) / 8, (height-2*offset) / 8]
-    context.font = "15px sans-serif"
     for (let n = 0; n < 8; ++n) {
-        context.fillStyle ="black"
-        context.fillText(n, 1.5*offset + n*stepX, offset/1.5)
-        context.fillText(n, offset/3, 2*offset + n*stepY)
+        context.fillStyle ="rgb(0,0,0)";
+        context.fillText(n, 1.5*offset + n*stepX, offset/1.5);
+        context.fillText(n, offset/3, 2*offset + n*stepY);
         for (let m = 0; m < 8; ++m) {
             const x = offset + n * stepX;
             const y = offset + m * stepY;
-            draw8x8Tile(n, m, x, y, stepX-10, stepY-10, context)
+            draw8x8Tile(n, m, x, y, stepX-10, stepY-10, context);
         }
     }
 }
@@ -171,4 +171,28 @@ export function getCoeffs(resTile) {
         }
     }
     return linear.solve(A, b);
+}
+
+export function drawCoeffTable(coeffs, precision, context) {
+    const { width, height } = canvasSetup(context);
+    context.font = "12px sans-serif"
+    const offset = 20;
+    const [stepX, stepY] = [(width-2*offset) / 8, (height-2*offset) / 8];
+    const [w, h] = [stepX - 2.5, stepY - 2.5];
+    context.textAlign = 'center';
+    for (let i = 0; i < 8; ++i) {
+        for (let j = 0; j < 8; ++j) {
+            const x = offset+i*stepX;
+            const y = offset+j*stepY;
+            const coeff = coeffs[i*8+j];
+            if (Math.abs(coeff) >= precision) {
+                context.fillStyle = 'rgba(100, 100, 100, 0.8)';
+                context.fillRect(x, y, w, h);
+            }
+            context.strokeRect(x, y, w, h);
+            context.stroke();
+            context.fillStyle = 'rgb(0,0,0)';
+            context.fillText(coeff.toFixed(3), x+stepX/2, y+stepY/2);
+        }
+    }
 }
