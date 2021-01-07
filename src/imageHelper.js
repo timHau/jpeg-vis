@@ -1,5 +1,6 @@
 import { chunk, flattenDeep, zip } from 'lodash';
 import { drawChannel } from './colorTransformHelper.js';
+import { getCoeffs, reconstruct } from './discreteCosineHelper.js';
 
 export function imgDataInto8x8Blocks(imgData) {
     // WARNING / TODO only supports square images of size 8n x 8n
@@ -74,4 +75,14 @@ export function drawImg8x8Blocks(blocks8x8, context, width, height) {
             drawChannel(asImgDatas[i + j * width / 8], context, [i * 8*1.3, j * 8*1.3])
         }
     }
+}
+
+export function compressBlocks(blocks8x8, precision) {
+    const res = [];
+    for (let block of blocks8x8) {
+        const coeffs = getCoeffs(block);
+        const reconst = reconstruct(coeffs, precision);
+        res.push(reconst);
+    }
+    return res;
 }

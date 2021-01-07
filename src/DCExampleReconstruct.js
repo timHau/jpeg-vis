@@ -8,7 +8,7 @@ import {
  import { exampleTile } from './linAlg.js';
 
 export default function DCExampleReconstruct() {
-    const [precision, setPrecision] = useState(0.00001);
+    const [precision, setPrecision] = useState(1);
     const tileExample = useRef();
     const exampleTable = useRef();
     const exampleReconst = useRef();
@@ -21,12 +21,12 @@ export default function DCExampleReconstruct() {
         drawTile(exampleTile, contextExample);
         // handle reconstruction of example tile
         const coeffs = getCoeffs(exampleTile);
-        const reconstruction = reconstruct(coeffs, 1.0 - precision);
+        const reconstruction = reconstruct(coeffs, precision);
         const contextReconst = exampleReconst.current.getContext('2d');
         drawTile(reconstruction, contextReconst);
         // draw coefficints of patterns as table
         const contextTable = exampleTable.current.getContext('2d');
-        drawCoeffTable(coeffs, 1.0 - precision, contextTable);
+        drawCoeffTable(coeffs, precision, contextTable);
         // compare both patterns in smaller size
         const contextCompareOrig = exampleCompareOrig.current.getContext('2d');
         const contextCompareRec = exampleCompareRec.current.getContext('2d');
@@ -41,7 +41,7 @@ export default function DCExampleReconstruct() {
    return <>
         <div className="display-container">
             <div className="slider-container">
-                <label>precision: {precision.toFixed(5)}</label>
+                <label>quality: {precision.toFixed(5)}</label>
                 <input 
                     type="range"
                     min={0} 
