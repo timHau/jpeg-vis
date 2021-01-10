@@ -81,6 +81,19 @@ export function getDiscCosineMat(n, m) {
 }
 
 
+export function generateRandomTile() {
+    const res = [];
+    for (let i = 0; i < 8; ++i) {
+        const row = [];
+        for (let j = 0; j < 8; ++j) {
+            const val = -1 + Math.random()*2;
+            row.push(val);
+        }
+        res.push(row);
+    }
+    return res;
+}
+
 export const exampleTile = [
     [  0,  29,  255,  135,  255,  255,  255,    0],
     [255,    0,  255,  255,  255,  255,    0,  255],
