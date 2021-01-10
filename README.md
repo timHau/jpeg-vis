@@ -2,8 +2,10 @@
 
 this is the repo for a visual introduction to the jpeg format and the discrete cosinus.
 
-## Requirements
-You will need [node.js](https://nodejs.org/en/) at least version 14
+## Screenshots
+![one dimensional cosine](./screenshots/dc_one_dim.png)
+![discrete cosine plot](./screenshots/dcPlot.png)
+
 
 ## Getting started
 To run the project from the terminal
@@ -13,10 +15,8 @@ cd jpeg-vis
 npm install
 npm start
 ```
-
-## Screenshots
-![one dimensional cosine](./screenshots/dc_one_dim.png)
-![discrete cosine plot](./screenshots/dcPlot.png)
+## Requirements
+You will need [node.js](https://nodejs.org/en/) at least version 14
 
 ## Inspiration
 This project was written by me as part of the seminar data compression held during winter semester 2020/21 in Frankfurt.
