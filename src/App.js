@@ -3,6 +3,8 @@ import Intro from './Intro.js';
 import ColorTransform from './ColorTransform.js';
 import DiscreteCosine from './DiscreteCosine.js';
 import Resources from './Resources.js';
+import Quantization from './Quantization.js';
+import Entropy from './Entropy.js';
 import './App.css';
 import 'katex/dist/katex.min.css';
 
@@ -15,6 +17,8 @@ export default function App() {
       <Intro/>
       <ColorTransform imgSrc={mountain}/>
       <DiscreteCosine imgSrc={mountain}/>
+      <Quantization />
+      <Entropy />
       <Resources/>
     </div>
   );

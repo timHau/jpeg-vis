@@ -55,7 +55,7 @@ export default function DCExampleReconstruct() {
         <div className="horizontal-display-container">
             <span>
                 <canvas width={400} height={400} ref={tileExample}/>
-                <p className="img-sub">Original Muster</p>
+                <p className="img-sub">Original Muster (Skaliert)</p>
             </span>
             <span>
                 <canvas width={400} height={400} ref={exampleTable}/>
@@ -63,7 +63,7 @@ export default function DCExampleReconstruct() {
             </span>
             <span>
                 <canvas width={400} height={400} ref={exampleReconst}/>
-                <p className="img-sub">Rekonstruirtes Muster</p>
+                <p className="img-sub">Rekonstruirtes Muster (skaliert)</p>
             </span>
             <span>
                 <canvas width={40} height={40} ref={exampleCompareOrig}/>

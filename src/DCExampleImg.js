@@ -5,6 +5,7 @@ import {
     getYChannel,
     drawChannel,
 } from './colorTransformHelper.js';
+import { InlineMath } from 'react-katex';
 import { imgDataInto8x8Blocks } from './imageHelper.js';
 import DCExampleImgRes from './DCExampleImgRes.js';
 
@@ -33,12 +34,17 @@ export default function DCExampleImg({ imgSrc }) {
     }, [imgSrc]);
 
     console.log('drawn');
-    return (
+    return <>
+        <p>
+            Um die Berechnung zu vereinfachen Beschränkt man sich auf <InlineMath math={`8 \\times 8`} />  Kästchen und teilt das zu komprimierende
+            Bild dafür in solche ein. Für jedes dieser Kästchen wird dann mit Hilfe der diskreten Kosinustransformation eine Approximation berrechnet, indem
+            Basismuster mit kleinem Koeffizienten weggelassen werden.
+        </p>
         <div className="horizontal-display-container">
             <span>
                 <canvas width={400} height={400} ref={originalImg} />
             </span>
-            <DCExampleImgRes blocks={blocks} yChannel={yChannel}/>
+            <DCExampleImgRes blocks={blocks} yChannel={yChannel} />
         </div>
-    )
+    </>
 }

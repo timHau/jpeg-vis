@@ -20,6 +20,7 @@ input[type="range"] {
 .chapter-intro {
   font-size: 2rem;
   border-bottom: 1px rgb(201, 201, 201, 0.7) solid;
+  margin-top: 1rem;
 }
 
 .display-container {
