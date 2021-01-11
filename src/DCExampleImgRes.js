@@ -3,7 +3,7 @@ import { drawChannel } from './colorTransformHelper.js';
 import { imgDataFrom8x8Blocks, compressBlocks } from './imageHelper.js';
 
 export default function DCExampleImgRes(props) {
-    const [pres, setPres] = useState(20);
+    const [pres, setPres] = useState(10);
     const reconstImg = useRef();
     const { blocks, yChannel } = props;
 
@@ -21,7 +21,7 @@ export default function DCExampleImgRes(props) {
     })
 
     function handleChangePres(e) {
-        setPres(parseInt(e.target.value));
+        setPres(parseFloat(e.target.value));
     }
 
     return <>
@@ -31,8 +31,8 @@ export default function DCExampleImgRes(props) {
                 <input 
                     type="range"
                     min={0} 
-                    max={25} 
-                    step={0.01} 
+                    max={15} 
+                    step={0.001} 
                     value={pres}
                     onChange={handleChangePres}
                 />
